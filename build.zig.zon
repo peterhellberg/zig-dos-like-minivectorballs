@@ -1,0 +1,16 @@
+.{
+    .name = .dos_like_minivectorballs,
+    .fingerprint = 0x7bb8ddc954165b50,
+    .version = "0.0.0",
+    .dependencies = .{
+        .dos = .{
+            .url = "https://github.com/mattiasgustavsson/dos-like/archive/ff103e4f58b4e707acb754a335bc43ee88c3ea9f.zip",
+            .hash = "N-V-__8AAP36qAAzOblQpGO4cHRqVAjt9lJ-lasAnOemFi3Y",
+        },
+    },
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+    },
+}
