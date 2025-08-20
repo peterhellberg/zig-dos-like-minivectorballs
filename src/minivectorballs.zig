@@ -158,9 +158,9 @@ fn setupDots() void {
                 c = 15;
             }
             c = @as(c_int, 15) - c;
-            depthtable1[@intCast(a)] = @as(u32, @bitCast(@as(c_int, 514) + (67372036 * c)));
-            depthtable2[@intCast(a)] = @as(u32, @bitCast(@as(c_int, 33751810) + (67372036 * c)));
-            depthtable3[@intCast(a)] = @as(u32, @bitCast(@as(c_int, 514) + (67372036 * c)));
+            depthtable1[@intCast(a)] = @bitCast(@as(c_int, 514) + (67372036 * c));
+            depthtable2[@intCast(a)] = @bitCast(@as(c_int, 33751810) + (67372036 * c));
+            depthtable3[@intCast(a)] = @bitCast(@as(c_int, 514) + (67372036 * c));
         }
     }
 }
@@ -184,17 +184,17 @@ fn setupPal() void {
             var b: c_int = 0;
             while (b < 4) : (b += 1) {
                 const c: c_int = 100 + (a * 9);
-                pal[@intCast((@as(c_int, 3) * @as(c_int, @bitCast(@as(c_uint, i)))) + 0)] = @as(u8, @bitCast(@as(u8, @truncate(
+                pal[@intCast((@as(c_int, 3) * @as(c_int, @bitCast(@as(c_uint, i)))) + 0)] = @bitCast(@as(u8, @truncate(
                     cols[@intCast((b * @as(c_int, 3)) + 0)],
-                ))));
-                pal[@intCast((@as(c_int, 3) * @as(c_int, @bitCast(@as(c_uint, i)))) + 1)] = @as(u8, @bitCast(@as(i8, @truncate(@divTrunc(@as(c_int, @bitCast(@as(
+                )));
+                pal[@intCast((@as(c_int, 3) * @as(c_int, @bitCast(@as(c_uint, i)))) + 1)] = @bitCast(@as(i8, @truncate(@divTrunc(@as(c_int, @bitCast(@as(
                     c_uint,
                     cols[@intCast((b * @as(c_int, 3)) + @as(c_int, 1))],
-                ))) * c, 256)))));
-                pal[@intCast((@as(c_int, 3) * @as(c_int, @bitCast(@as(c_uint, i)))) + 2)] = @as(u8, @bitCast(@as(i8, @truncate(@divTrunc(@as(c_int, @bitCast(@as(
+                ))) * c, 256))));
+                pal[@intCast((@as(c_int, 3) * @as(c_int, @bitCast(@as(c_uint, i)))) + 2)] = @bitCast(@as(i8, @truncate(@divTrunc(@as(c_int, @bitCast(@as(
                     c_uint,
                     cols[@intCast((b * @as(c_int, 3)) + @as(c_int, 2))],
-                ))) * c, 256)))));
+                ))) * c, 256))));
                 i +%= 1;
             }
         }
@@ -299,16 +299,16 @@ fn updateGravity(d: [*c]struct_dot) void {
     if ((ax >= @as(f32, @floatFromInt(0))) and (ax < @as(f32, @floatFromInt(320)))) {
         const shadow: c_int = @intFromFloat((524288.0 / bp) + 100.0);
         if ((shadow >= 0) and (shadow < 200)) {
-            d.*.posshadow = @as(u16, @bitCast(@as(c_short, @truncate(@as(c_int, @bitCast(@as(c_uint, rows[@intCast(shadow)]))) + @as(c_int, @intFromFloat(ax))))));
+            d.*.posshadow = @bitCast(@as(c_short, @truncate(@as(c_int, @bitCast(@as(c_uint, rows[@intCast(shadow)]))) + @as(c_int, @intFromFloat(ax)))));
             d.*.shadow_visible = 1 != 0;
             d.*.yadd += @bitCast(@as(c_short, @truncate(@as(c_int, @bitCast(@as(c_int, gravity))))));
             var b_: i16 = @bitCast(@as(c_short, @truncate(@as(c_int, @bitCast(@as(c_int, d.*.y))) + @as(c_int, @bitCast(@as(c_int, d.*.yadd))))));
             if (@as(c_int, @bitCast(@as(c_int, b_))) >= @as(c_int, @bitCast(@as(c_int, gravitybottom)))) {
-                d.*.yadd = @as(i16, @bitCast(@as(c_short, @truncate(@divTrunc(-@as(c_int, @bitCast(@as(c_int, d.*.yadd))) * @as(c_int, @bitCast(@as(c_int, gravityd))), @as(c_int, 16))))));
-                b_ = @as(i16, @bitCast(@as(c_short, @truncate(@as(c_int, @bitCast(@as(c_int, gravitybottom))) + @as(c_int, @bitCast(@as(c_int, d.*.yadd)))))));
+                d.*.yadd = @bitCast(@as(c_short, @truncate(@divTrunc(-@as(c_int, @bitCast(@as(c_int, d.*.yadd))) * @as(c_int, @bitCast(@as(c_int, gravityd))), @as(c_int, 16)))));
+                b_ = @bitCast(@as(c_short, @truncate(@as(c_int, @bitCast(@as(c_int, gravitybottom))) + @as(c_int, @bitCast(@as(c_int, d.*.yadd))))));
             }
             d.*.y = b_;
-            const b__: i16 = @intFromFloat((@as(f32, @floatFromInt(@as(c_int, @bitCast(@as(c_int, b_))) << 6)) / bp) + @as(f32, @floatFromInt(@as(c_int, 100))));
+            const b__: i16 = @intFromFloat((@as(f32, @floatFromInt(@as(c_int, @bitCast(@as(c_int, b_))) << 6)) / bp) + 100);
             if ((@as(c_int, @bitCast(@as(c_int, b__))) >= 0) and (@as(c_int, @bitCast(@as(c_int, b__))) < 200)) {
                 const c: i16 = @bitCast(@as(c_short, @truncate(@as(c_int, @bitCast(@as(c_uint, rows[@intCast(b__)]))) + @as(c_int, @intFromFloat(ax)))));
                 const ic: u8 = @bitCast(@as(i8, @truncate((@as(c_int, @bitCast(@as(c_int, @as(i16, @intFromFloat(bp))))) >> 6) & ~@as(c_int, 3))));
@@ -479,12 +479,7 @@ pub export fn dosmain(_: c_int, _: [*c][*c]u8) c_int {
 
     while (frame < 2450) {
         if (frame > 2300) {
-            setpalette(
-                @as(
-                    [*c]u8,
-                    @ptrCast(@alignCast(&pal2[0])),
-                ),
-            );
+            setpalette(@ptrCast(@alignCast(&pal2[0])));
         }
 
         waitvbl();
