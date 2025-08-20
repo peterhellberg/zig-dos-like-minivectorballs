@@ -9,6 +9,10 @@ example from [dos-like](https://github.com/mattiasgustavsson/dos-like) to build 
 >
 > Most of the time was spent figuring out how to setup the build :joy:
 
+## Screenshots
+
+![CRT](files/CRT.png)
+
 ## Requirements
 
 A fairly recent version of [Zig master](https://ziglang.org/download/#release-master)
